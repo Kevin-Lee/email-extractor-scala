@@ -1,36 +1,18 @@
-target/
-
-*.pydevproject
-.project
-.classpath
-/.settings/
-*/.settings/*
-!/.settings/.jsdtscope
-!*/.settings/.jsdtscope
-.metadata
-bin/
-
-ajcore.*.txt
-
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.loadpath
-
-# External tool builders
-.externalToolBuilders/
-
-# Locally stored "Eclipse launch configurations"
-*.launch
-
-# CDT-specific
-.cproject
-
-# PDT-specific
-.buildpath
-
-# for Mac
-.DS_Store
+logs
+project/project
+project/target
+target
+tmp
+.history
+dist
+/.idea
+/*.iml
+/out
+/.idea_modules
+/.classpath
+/.project
+/RUNNING_PID
+/.settings
+/bin
+/.target
+/.cache

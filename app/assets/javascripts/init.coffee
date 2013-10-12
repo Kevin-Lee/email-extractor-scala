@@ -1,0 +1,1 @@
+(init.call(this) for init in window.kevinInitialProcess) if window.kevinInitialProcess?

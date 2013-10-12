@@ -1,11 +1,7 @@
 /**
  *
  */
-package com.lckymn.kevin.emailextractor.service;
-
-import java.util.Set;
-
-import com.lckymn.kevin.emailextractor.pojo.EmailAddress;
+package models
 
 /**
  * <pre>
@@ -17,9 +13,12 @@ import com.lckymn.kevin.emailextractor.pojo.EmailAddress;
  * </pre>
  *
  * @author Lee, SeongHyun (Kevin)
- * @version 0.0.1 (2010-04-05)
+ * @version 0.0.1 (2013-03-20)
  */
-public interface EmailAddressExtractor
-{
-  Set<EmailAddress> extract(String value);
+case class EmailAddresses (
+  inputValue: String
+)
+
+object EmailAddresses {
+  def apply = new EmailAddresses("")
 }
