@@ -16,18 +16,25 @@ kevinInitialProcess.push ->
       console.log "r: #{r}"
       r
 
-  $("#clearButton").on "click", (event) ->
-    $inputText.val ""
-    $resultArea.text ""
+  hideResultMessage = () ->
     $resultMessage.text ""
     $resultMessage.addClass "hidden" unless $resultMessage.hasClass "hidden"
     $resultMessage.removeClass removeClassWithPrefix "alert"
-    $message.text "" if $message.length
+
+  hideMessage = () ->
+    $message.text ""
     $message.addClass "hidden" unless $message.hasClass "hidden"
+
+  $("#clearButton").on "click", (event) ->
+    $inputText.val ""
+    $resultArea.text ""
+    hideResultMessage()
+    hideMessage()
     event.preventDefault()
 
   $resultArea.on "click", (event) ->
     $resultArea.select()
+    return
   
   $.ajaxSettings.traditional = true
   $.ajaxSetup
@@ -36,12 +43,14 @@ kevinInitialProcess.push ->
     "contentType" : "text/json"
 
   $submitButton = $("#submitButton")
+
+
   $submitButton.on("click", (event) ->
     $.ajax({
       "url" : "/email-extractor-scala",
       "data" : JSON.stringify {
-          "inputValue": "#{$inputText.val()}"
-        }
+            "inputValue": "#{$inputText.val()}"
+          }
     }).done((response) -> 
       if response.success
         $resultMessage.text(response.message)
@@ -49,14 +58,11 @@ kevinInitialProcess.push ->
         $resultMessage.removeClass removeClassWithPrefix "alert"
         $resultMessage.addClass "alert alert-success"
         $resultArea.text(response.result)
-        $message.text("")
-        $message.addClass "hidden" unless $message.hasClass("hidden")
+        hideMessage()
       else
         $message.text(response.message)
         $message.removeClass "hidden" if $message.hasClass "hidden"
-        $resultMessage.text("")
-        $resultMessage.addClass "hidden" unless $resultMessage.hasClass "hidden"
-        $resultMessage.removeClass removeClassWithPrefix "alert"
+        hideResultMessage()
         $resultArea.text("")
     ).fail((jqXHR, textStatus, errorThrown) ->
       console.log "=============== ERROR =============== {"
@@ -70,9 +76,8 @@ kevinInitialProcess.push ->
       console.log errorThrown
       console.log "} ====================================="
       $message.html("[#{textStatus}] Something went wrong! Please try again later.<p /> Details: #{errorThrown}")
-      $resultMessage.text("")
-      $resultMessage.addClass "hidden" unless $resultMessage.hasClass "hidden"
-      $resultMessage.removeClass removeClassWithPrefix "alert"
+      $message.removeClass "hidden" if $message.hasClass "hidden"
+      hideResultMessage()
       $resultArea.text("")
     )
   )

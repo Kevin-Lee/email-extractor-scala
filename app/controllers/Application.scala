@@ -36,7 +36,8 @@ object Application extends Controller {
             Ok(Json.parse(s"""
               {
                 "success": false,
-                "message": "You did not submit any text."
+                "message": "You did not submit any text.",
+                "howMany": 0
               }
               """))
           case _ =>
@@ -44,9 +45,7 @@ object Application extends Controller {
             val resultSet = emailAddressExtractor.extract(inputValue)
               .map(email => email.emailAddress)
             val result = resultSet.mkString(", ")
-
             val size = resultSet.size
-
             val resultMessage =
               if (0 == size)
                 "There is no email address found."
@@ -57,6 +56,7 @@ object Application extends Controller {
               {
                 "success": true,
                 "message": "${resultMessage}",
+                "howMany": ${size},
                 "result": "${result}"
               }
               """))
