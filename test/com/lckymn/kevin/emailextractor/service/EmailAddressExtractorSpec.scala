@@ -2,8 +2,8 @@ package com.lckymn.kevin.emailextractor.service
 
 import org.junit.runner.RunWith
 import org.specs2.mutable.Specification
-import com.lckymn.kevin.emailextractor.EmailAddress
-import com.lckymn.kevin.emailextractor.EmailAddress
+import models.EmailAddress
+import models.EmailAddress
 
 class EmailAddressExtractorSuite extends Specification {
 

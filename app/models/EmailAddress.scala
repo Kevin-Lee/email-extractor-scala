@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.lckymn.kevin.emailextractor;
+package models
 
 /**
  *

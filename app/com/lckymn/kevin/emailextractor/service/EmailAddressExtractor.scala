@@ -4,9 +4,9 @@
 package com.lckymn.kevin.emailextractor.service;
 
 import scala.util.matching.Regex
-import com.lckymn.kevin.emailextractor.EmailAddress
-import com.lckymn.kevin.emailextractor.EmailAddress
-import com.lckymn.kevin.emailextractor.EmailAddress
+import models.EmailAddress
+import models.EmailAddress
+import models.EmailAddress
 import com.lckymn.kevin.emailextractor.AbstractExtractor
 
 /**

@@ -1,6 +1,6 @@
 package controllers
 
-import com.lckymn.kevin.emailextractor.EmailAddress
+import models.EmailAddress
 import com.lckymn.kevin.emailextractor.Extractor
 import com.lckymn.kevin.emailextractor.service._
 import models.EmailAddresses
