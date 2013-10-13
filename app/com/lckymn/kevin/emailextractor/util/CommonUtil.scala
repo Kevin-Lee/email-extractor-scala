@@ -30,6 +30,6 @@ object CommonUtil {
               """)
   }
 
-  def toResultJson(isSuccess: Boolean, message: String, howMany: Int): JsValue =
-    toResultJson(isSuccess, message, howMany, "")
+  def toResultJson(message: String): JsValue =
+    toResultJson(false, message, 0, "")
 }

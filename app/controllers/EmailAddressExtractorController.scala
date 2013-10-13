@@ -29,7 +29,7 @@ object EmailAddressExtractorController extends Controller {
       case (inputValue) => {
         inputValue match {
           case "" =>
-            Ok(toResultJson(false, "You did not submit any text.", 0))
+            Ok(toResultJson("You did not submit any text."))
           case _ =>
             val resultSet = emailAddressExtractor.extract(inputValue)
               .map(email => email.emailAddress)

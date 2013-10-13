@@ -17,20 +17,11 @@ import com.lckymn.kevin.emailextractor.util.CommonUtil._
  * @author Lee, SeongHyun (Kevin)
  * @version 0.0.1 (2013-03-20)
  */
-object Application extends Controller {
+object Application extends Controller with JavascriptRoutable {
 
   val emailAddressExtractor: Extractor[EmailAddress] = EmailAddressExtractor()
-
-  def javascriptRoutes = Action { implicit request =>
-    import routes.javascript._
-    Ok(
-      Routes.javascriptRouter("jsRoutes")(
-        EmailAddressExtractorController.extract
-      )
-    ).as("text/javascript") 
-  }
   
   def index = Action {
-    Ok(views.html.index("0.0.3"))
+    Ok(views.html.index("0.0.4"))
   }
 }
