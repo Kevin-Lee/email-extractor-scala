@@ -21,31 +21,16 @@ object Application extends Controller {
 
   val emailAddressExtractor: Extractor[EmailAddress] = EmailAddressExtractor()
 
-  def index = Action {
-    Ok(views.html.index("0.0.2"))
+  def javascriptRoutes = Action { implicit request =>
+    import routes.javascript._
+    Ok(
+      Routes.javascriptRouter("jsRoutes")(
+        EmailAddressExtractorController.extract
+      )
+    ).as("text/javascript") 
   }
-
-  implicit val rds = (
-    (__ \ 'inputValue).read[String])
-
-  def extract = Action(parse.json) { implicit request =>
-    request.body.validate[String].map {
-      case (inputValue) => {
-        inputValue match {
-          case "" =>
-            Ok(toResultJson(false, "You did not submit any text.", 0))
-          case _ =>
-            val resultSet = emailAddressExtractor.extract(inputValue)
-              .map(email => email.emailAddress)
-            val size = resultSet.size
-            Ok(toResultJson(true, makeMessage(size), size, resultSet.mkString(", ")))
-        }
-      }
-    }.recoverTotal {
-      e =>
-        {
-          BadRequest("Detected error:" + JsError.toFlatJson(e))
-        }
-    }
+  
+  def index = Action {
+    Ok(views.html.index("0.0.3"))
   }
 }

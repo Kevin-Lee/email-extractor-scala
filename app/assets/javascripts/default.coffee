@@ -43,8 +43,7 @@ class Page
     $submitButton = $("#submitButton")
 
     $submitButton.on("click", (event) =>
-      $.ajax({
-        "url" : "/email-extractor-scala",
+      jsRoutes.controllers.EmailAddressExtractorController.extract().ajax({
         "data" : JSON.stringify {
               "inputValue": "#{@inputText.val()}"
             }

@@ -9,7 +9,7 @@ import com.github.play2war.plugin._
 object ApplicationBuild extends Build {
 
   val appName = "email-extractor-scala"
-  val appVersion = "1.0-SNAPSHOT"
+  val appVersion = "0.0.3-SNAPSHOT"
   
   override def settings = super.settings ++ Seq(
     EclipseKeys.withSource in ThisBuild := true
