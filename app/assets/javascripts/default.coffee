@@ -5,13 +5,11 @@ class Page
 
   removeClassWithPrefix = (prefix) ->
     (index, css) ->
-      r = ((css.match ///
+      ((css.match ///
         #{prefix}
         [-]?
         \S*
         ///g) or []).join(' ')
-      console.log "r: #{r}"
-      r
 
   hideResultMessage: () =>
     @resultMessage.text ""

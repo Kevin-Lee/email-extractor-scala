@@ -6,6 +6,7 @@ import play.api.test.Helpers._
 import play.api.libs.json.Json
 import scala.collection.immutable.Set
 import com.lckymn.kevin.emailextractor.util.CommonUtil._
+import controllers.routes
 
 /**
  * Add your spec here.
@@ -24,7 +25,7 @@ class ApplicationSpec extends Specification {
 
     "render the index page" in {
       running(FakeApplication()) {
-        val home = route(FakeRequest(GET, "/email-extractor-scala")).get
+        val home = route(FakeRequest(GET, "/")).get
 
         status(home) must equalTo(OK)
         contentType(home) must beSome.which(_ == "text/html")
@@ -34,7 +35,7 @@ class ApplicationSpec extends Specification {
 
     "post no input JSON at all" in {
       running(FakeApplication()) {
-        val result = route(FakeRequest(POST, "/email-extractor-scala")).get
+        val result = route(FakeRequest(POST, "/")).get
 
         status(result) must equalTo(BAD_REQUEST)
         contentType(result) must beSome.which(_ == "text/html")
@@ -43,7 +44,7 @@ class ApplicationSpec extends Specification {
 
     "post with empty input JSON value" in {
       running(FakeApplication()) {
-        val result = route(FakeRequest(POST, "/email-extractor-scala")
+        val result = route(FakeRequest(POST, "/")
           .withJsonBody(Json.obj("inputValue" -> ""))).get
 
         status(result) must equalTo(OK)
@@ -63,7 +64,7 @@ class ApplicationSpec extends Specification {
 
     "post with JSON containing no email address" in {
       running(FakeApplication()) {
-        val result = route(FakeRequest(POST, "/email-extractor-scala")
+        val result = route(FakeRequest(POST, "/")
           .withJsonBody(Json.obj("inputValue" -> "This doesn't contain any email addresses."))).get
 
         status(result) must equalTo(OK)
@@ -88,7 +89,7 @@ class ApplicationSpec extends Specification {
         val first = "kevin.lee@some.fake.testemailaddress.com"
         val second = "another@email.address.cc"
         val third = "the.third.one@test.com"
-        val result = route(FakeRequest(POST, "/email-extractor-scala")
+        val result = route(FakeRequest(POST, "/")
           .withJsonBody(Json.obj("inputValue" -> s"This contains some email addresses. ${first}, ${second} blah blah ${third}"))).get
 
         status(result) must equalTo(OK)
