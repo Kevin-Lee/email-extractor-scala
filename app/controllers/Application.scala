@@ -1,14 +1,16 @@
 package controllers
 
-import models.EmailAddresses
+import com.lckymn.kevin.emailextractor.EmailAddress
+import com.lckymn.kevin.emailextractor.Extractor
 import com.lckymn.kevin.emailextractor.service._
+
+import models.EmailAddresses
 import play.api._
+import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-import play.api.mvc._
-import com.lckymn.kevin.emailextractor.Extractor
-import com.lckymn.kevin.emailextractor.EmailAddress
-
+import play.api.libs.json._
+import play.api.libs.functional.syntax._
 
 /**
  *
@@ -19,47 +21,52 @@ object Application extends Controller {
 
   val emailAddressExtractor: Extractor[EmailAddress] = EmailAddressExtractor()
 
-  val emailAddressesForm: Form[EmailAddresses] = Form(mapping("inputValue" -> text) {
-    (inputValue) => EmailAddresses(inputValue)
-  } {
-    emailAddresses => Some(emailAddresses.inputValue)
-  })
-
   def index = Action {
-    Ok(views.html.index(emailAddressesForm))
+    Ok(views.html.index("0.0.2"))
   }
 
-  def extract = Action { implicit request =>
+  implicit val rds = (
+    (__ \ 'inputValue).read[String])
 
-    val binded = emailAddressesForm.bindFromRequest
-    val inputValue = binded.get.inputValue
-    if (inputValue.isEmpty) {
-      binded.fold(
-        errors => Ok(views.html.index(emailAddressesForm, message = "ERROR")),
-        emailAddresses =>
-          Ok(views.html.index(emailAddressesForm,
-            message = "You did not submit any text.")))
-    }
-    else {
-      val resultSet = emailAddressExtractor.extract(inputValue)
-        .map(email => email.emailAddress)
-      val result = resultSet.mkString(", ")
+  def extract = Action(parse.json) { implicit request =>
+    request.body.validate[String].map {
+      case (inputValue) => {
+        inputValue match {
+          case "" =>
+            Ok(Json.parse(s"""
+              {
+                "success": false,
+                "message": "You did not submit any text."
+              }
+              """))
+          case _ =>
 
-      val size = resultSet.size
+            val resultSet = emailAddressExtractor.extract(inputValue)
+              .map(email => email.emailAddress)
+            val result = resultSet.mkString(", ")
 
-      val resultMessage =
-        if (0 == size)
-        "There is no email address found."
-        else
-          s"There ${if (1 == size) "is 1 email address" else s"are $size email addresses"} extracted from the given text."
+            val size = resultSet.size
 
-      binded.fold(
-        errors => Ok(views.html.index(emailAddressesForm, message = "ERROR")),
-        emailAddresses =>
-          Ok(views.html.index(emailAddressesForm,
-            previousInput = inputValue,
-            resultMessage = resultMessage,
-            result = result)))
+            val resultMessage =
+              if (0 == size)
+                "There is no email address found."
+              else
+                s"There ${if (1 == size) "is 1 email address" else s"are $size email addresses"} extracted from the given text."
+
+            Ok(Json.parse(s"""
+              {
+                "success": true,
+                "message": "${resultMessage}",
+                "result": "${result}"
+              }
+              """))
+        }
+      }
+    }.recoverTotal {
+      e =>
+        {
+          BadRequest("Detected error:" + JsError.toFlatJson(e))
+        }
     }
   }
 }

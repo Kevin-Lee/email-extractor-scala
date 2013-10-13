@@ -1,4 +1,4 @@
-@(emailAddressesForm: Form[EmailAddresses], previousInput: String = "", message: String = "", resultMessage: String = "", result: String = "")
+@(version: String)
 @import helper._
 @import helper.twitterBootstrap._
 <!DOCTYPE html>
@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     <title>Extract Email Addresses</title>
     @include.allCss()
   </head>
@@ -19,35 +18,28 @@
           <div class="col-sm-24 col-md-12">
             <h3><a href="@{routes.Application.index}">Email Address Extractor</a></h3>
             <div>
-              Email Address Extractor (written in Scala) test version (v 0.0.1). -Created by <a href="http://lckymn.com" target="_blank">Kevin</a>
+              Email Address Extractor (written in Scala) test version (v @version). -Created by <a href="http://lckymn.com" target="_blank">Kevin</a>
             </div>
           </div>
         </div>
-        <br />@if(!message.isEmpty()) {
-        <div id="message" class="row">
-          <div class="col-sm-24 col-md-12">
-            <div style="margin: 10px; color: red; font-weight: bolder;">
-              @message
-            </div>
-          </div>
-        </div>
-        }
+        <br />
         <div class="row">
           <div class="col-sm-24 col-md-12">
-          @form(action = routes.Application.extract) {
+            <div style="margin: 10px; color: red; font-weight: bolder;" id="message"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-24 col-md-12">
             <div>
               <label>Please enter text from which you want to extract email addresses.</label>
             </div>
             <div>
-            @input(field = emailAddressesForm("inputValue"), '_label -> "") { (id, name, value, args) =>
-                <textarea name="@name" id="@id" style="width: 80%; height: 250px;">@previousInput</textarea>
-            }
+              <textarea id="inputText" class="form-control margin-top-and-bottom" rows="12"></textarea>
             </div>
             <div>
-              <input type="submit" name="submitButton" value="   Submit   " style="margin-top: 10px;" />
+            <button type="button" name="submitButton" id="submitButton" class="btn btn-primary">Submit</button>
               <button id="clearButton" type="button" class="btn btn-link">Clear</button>
             </div>
-          }
           </div><!-- /.col -->
         </div><!-- /.row -->
         <br />
@@ -56,10 +48,9 @@
             <div>
               <label>Result: </span>
             </div>
-            <br />
-            <div id="resultMessage">@if(!resultMessage.isEmpty()) { @resultMessage }</div>
+            <div id="resultMessage"></div>
             <div>
-              <textarea readonly style="width: 80%; height: 250px;">@result</textarea>
+              <textarea id="resultArea" readonly class="form-control margin-top-and-bottom" rows="12"></textarea>
             </div>
           </div><!-- /.col -->
         </div><!-- /.row -->
