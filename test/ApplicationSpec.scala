@@ -22,7 +22,7 @@ class ApplicationSpec extends Specification {
     
     "render the index page" in {
       running(FakeApplication()) {
-        val home = route(FakeRequest(GET, "/email-extractor")).get
+        val home = route(FakeRequest(GET, "/email-extractor-scala")).get
         
         status(home) must equalTo(OK)
         contentType(home) must beSome.which(_ == "text/html")

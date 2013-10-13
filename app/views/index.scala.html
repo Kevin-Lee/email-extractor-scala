@@ -18,16 +18,17 @@
           <div class="col-sm-24 col-md-12">
             <h3><a href="@{routes.Application.index}">Email Address Extractor</a></h3>
             <div>
-              Email Address Extractor (written in Scala) test version (v @version). -Created by <a href="http://lckymn.com" target="_blank">Kevin</a>
+              <p>
+                Email Address Extractor (written in Scala) test version (v @version). -Created by <a href="http://lckymn.com" target="_blank">Kevin</a>
+              </p>
+              <p>
+                <a href="https://github.com/Kevin-Lee/email-extractor-scala" target="_blank">Source code is available here</a>
+              </p>
             </div>
-          </div>
-        </div>
+            <div class="alert alert-danger hidden" id="message"></div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
         <br />
-        <div class="row">
-          <div class="col-sm-24 col-md-12">
-            <div style="margin: 10px; color: red; font-weight: bolder;" id="message"></div>
-          </div>
-        </div>
         <div class="row">
           <div class="col-sm-24 col-md-12">
             <div>
@@ -48,7 +49,7 @@
             <div>
               <label>Result: </label>
             </div>
-            <div id="resultMessage"></div>
+            <div id="resultMessage" class="alert hidden"></div>
             <div>
               <textarea id="resultArea" readonly class="form-control margin-top-and-bottom" rows="12"></textarea>
             </div>

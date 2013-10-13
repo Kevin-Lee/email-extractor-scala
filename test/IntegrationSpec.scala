@@ -16,7 +16,7 @@ class IntegrationSpec extends Specification {
 //    "work from within a browser" in {
 //      running(TestServer(3333), HTMLUNIT) { browser =>
 //
-//        browser.goTo("http://localhost:3333/email-extractor")
+//        browser.goTo("http://localhost:3333/email-extractor-scala")
 //
 //        browser.pageSource must contain("<title>Extract Email Addresses</title>")
 //       
