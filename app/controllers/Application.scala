@@ -10,6 +10,7 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
+import play.core.Router.JavascriptReverseRoute
 import com.lckymn.kevin.emailextractor.util.CommonUtil._
 
 /**
@@ -18,6 +19,7 @@ import com.lckymn.kevin.emailextractor.util.CommonUtil._
  * @version 0.0.1 (2013-03-20)
  */
 object Application extends Controller with JavascriptRoutable {
+  val javascriptReverseRoute = List(controllers.routes.javascript.EmailAddressExtractorController.extract)
 
   val emailAddressExtractor: Extractor[EmailAddress] = EmailAddressExtractor()
   
