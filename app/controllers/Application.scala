@@ -10,7 +10,6 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
-import play.core.Router.JavascriptReverseRoute
 import com.lckymn.kevin.emailextractor.util.CommonUtil._
 
 /**
