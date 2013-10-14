@@ -79,6 +79,6 @@ class Page
 kevinInitialProcess.push ->
   page = new Page
   page.setUp()
-  
 
-window.kevinInitialProcess = ([] unless window.kevinInitialProcess).concat kevinInitialProcess
+window.kevinInitialProcess = [] unless window.kevinInitialProcess
+window.kevinInitialProcess = window.kevinInitialProcess.concat kevinInitialProcess
