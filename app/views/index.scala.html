@@ -1,6 +1,4 @@
 @(version: String)
-@import helper._
-@import helper.twitterBootstrap._
 <!DOCTYPE html>
 <html>
   <head>
@@ -35,11 +33,11 @@
               <label>Please enter text from which you want to extract email addresses.</label>
             </div>
             <div>
-              <textarea id="inputText" class="form-control margin-top-and-bottom" rows="12"></textarea>
+              <textarea id="inputText" class="form-control margin-top-and-bottom" rows="12" placeholder="Put some text may or may not contain email addresses here."></textarea>
             </div>
             <div>
               <button type="button" name="submitButton" id="submitButton" class="btn btn-primary">Submit</button>
-              <button id="clearButton" type="button" class="btn btn-link">Clear</button>
+              <button id="clearButton" type="button" class="btn btn-danger">Clear</button>
             </div>
           </div><!-- /.col -->
         </div><!-- /.row -->
