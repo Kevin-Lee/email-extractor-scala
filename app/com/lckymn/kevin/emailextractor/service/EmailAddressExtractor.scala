@@ -20,7 +20,7 @@ case class SimpleEmailAddressExtractor(val pattern: Regex) extends AbstractExtra
   }
 }
 
-object DefaultEmailAddressExtractor extends SimpleEmailAddressExtractor("([\\w-_.]+@[\\w-_]+(?:[.][\\w-_]+)+)".r)
+object DefaultEmailAddressExtractor extends SimpleEmailAddressExtractor("([a-zA-Z0-9]+([-_\\.]+[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([-_]+[a-zA-Z0-9]+)*(?:[.][a-zA-Z0-9]+([-_]+[a-zA-Z0-9]+)*)+)".r)
 
 object EmailAddressExtractor {
   def apply() = DefaultEmailAddressExtractor
