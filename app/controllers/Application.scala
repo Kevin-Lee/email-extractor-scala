@@ -24,6 +24,6 @@ object Application extends Controller with JavascriptRoutable {
   val emailAddressExtractor: Extractor[EmailAddress] = EmailAddressExtractor()
   
   def index = Action {
-    Ok(views.html.index("0.0.7"))
+    Ok(views.html.index("0.0.8"))
   }
 }
