@@ -1,11 +1,9 @@
 package com.lckymn.kevin.emailextractor.service
 
-import org.junit.runner.RunWith
+import models.EmailAddress
 import org.specs2.mutable.Specification
-import models.EmailAddress
-import models.EmailAddress
 
-class EmailAddressExtractorSuite extends Specification {
+class EmailAddressExtractorSpec extends Specification {
 
   trait Emails {
     val value1 = "test@test.com, tere@some.com, sdjsdjk@blah.com"
@@ -19,11 +17,11 @@ class EmailAddressExtractorSuite extends Specification {
       EmailAddress("tere@some.com"),
       EmailAddress("sdjsdjk@blah.com"))
 
-    val value3 = "test@test.com dskljsdkjsd;dskjd TEST@TEST.COM another@email.com tere@some.com, sdkjdasiuodas sdjsdjk@blah.com. sdkljsdlkjasd"
+    val value3 = "test@test.com dskljsdkjsd;dskjd TEST@TEST.COM another_address-2@email.com tere+blah@some.com, sdkjdasiuodas sdj.sdjk@blah.com. sdkljsdlkjasd"
     val expectedEmailSet3 = Set(EmailAddress("test@test.com"),
-      EmailAddress("another@email.com"),
-      EmailAddress("tere@some.com"),
-      EmailAddress("sdjsdjk@blah.com"))
+      EmailAddress("another_address-2@email.com"),
+      EmailAddress("tere+blah@some.com"),
+      EmailAddress("sdj.sdjk@blah.com"))
 
     val empty = Set.empty
 

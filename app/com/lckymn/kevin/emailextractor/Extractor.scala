@@ -14,11 +14,10 @@ trait Extractor[T] {
   def extract(value: String): Set[T]
 }
 
-abstract trait AbstractExtractor[T] extends Extractor[T] {
+trait AbstractExtractor[T] extends Extractor[T] {
   val pattern: Regex
-  protected def extract(value: String, mapper: String => T): Set[T] = {
+  protected def extract(value: String, mapper: String => T): Set[T] =
     pattern.findAllIn(value)
       .toSet[String]
       .map(mapper)
-  }
 }

@@ -9,7 +9,7 @@ import com.github.play2war.plugin._
 object ApplicationBuild extends Build {
 
   val appName = "email-extractor-scala"
-  val appVersion = "0.0.8-SNAPSHOT"
+  val appVersion = "0.0.9"
   
   override def settings = super.settings ++ Seq(
     EclipseKeys.withSource in ThisBuild := true,
@@ -28,7 +28,7 @@ object ApplicationBuild extends Build {
     .settings(Play2WarPlugin.play2WarSettings: _*)
     .settings(
       // Add your own project settings here
-      scalaVersion := "2.10.4",
+      scalaVersion := "2.10.6",
 //      coffeescriptOptions := Seq("native", "/usr/local/bin/coffee -p"),
       templatesImport += "models._",
       Play2WarKeys.servletVersion := "3.0"
